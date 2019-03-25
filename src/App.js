@@ -310,12 +310,40 @@ class App extends Component {
      * ORDER HISTORY PAGE composite component
      */
     OrderHistoryPage(){
+        let order_form;
+        let orders;
+        if(this.state.user.userAuthenticated){
+            if(this.state.orders){
+                orders=<div className="row">
+                <OrderHistory key={this.state.order}/>
+                </div>
+            }
+            else{
+                orders = <div></div>;
+            }
 
-        console.log(component_name, this.state.user.userEmail);
+            order_form = <div className="row">
+                            <OrderHistory email={this.state.user.userEmail}
+                                       place={this.state.pizza_place} />
+                            {orders}                                       
+                         </div>;
+
+        }else{
+            order_form = <div className="row"><p>You must be logged in to view the order history.</p></div>;
+        }
+        return(
+            <React.Fragment>
+                <div className="row">
+                    {order_form}
+                </div>
+            </React.Fragment>            
+        );     
+
+        /*console.log(component_name, this.state.user.userEmail);
 
         return(
             <OrderHistory email={this.state.user.userEmail} />
-        )
+        )*/
     }
 
 
